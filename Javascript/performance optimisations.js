@@ -1,6 +1,6 @@
 /*Document fragments (DocumentFragment) are used in JavaScript to create and manipulate DOM elements more efficiently, especially when dealing with multiple elements or complex DOM manipulations. Here are some reasons why you might want to use DocumentFragment:
 
-Performance Optimization:
+Performance Optimizations:
 When you append elements to the DOM one by one, the browser has to re-render the document each time, which can be inefficient, especially when dealing with a large number of elements.
 DocumentFragment allows you to build up a DOM structure off-screen without causing reflows or repaints. Once the fragment is complete, you can append it to the document in one operation, minimizing performance overhead.
 Reduced Browser Repaints:
