@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .row {
+        border: 2px solid grey;
+        width: 300px;
+        height: 100px;
+        display: flex;
+      }
+      .col {
+        height: 100px;
+        width: 100px;
+        border: 2px solid black;
+        display: inline-block;
+      }
+      .cellMarkedForPlayer1 {
+        background-color: aquamarine;
+      }
+      .cellMarkedForPlayer2 {
+        background-color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="row row-1">
+        <div class="col col-0-0" onclick="cellClicked(0,0)"></div>
+        <div class="col col-0-1" onClick="cellClicked(0,1)"></div>
+        <div class="col col-0-2" onClick="cellClicked(0,2)"></div>
+      </div>
+      <div class="row row-2">
+        <div class="col col-1-0" onclick="cellClicked(1,0)"></div>
+        <div class="col col-1-1" onclick="cellClicked(1,1)"></div>
+        <div class="col col-1-2" onclick="cellClicked(1,2)"></div>
+      </div>
+      <div class="row row-3">
+        <div class="col col-2-0" onclick="cellClicked(2,0)"></div>
+        <div class="col col-2-1" onclick="cellClicked(2,1)"></div>
+        <div class="col col-2-2" onclick="cellClicked(2,2)"></div>
+      </div>
+    </div>
+
+    <div>
+      <p id="winning-player"></p>
+    </div>
+
+    <div>
+      <button onclick="startOver()">Start-Over</button>
+    </div>
+
+    <script src="./tic-tac-toe.js" defer></script>
+  </body>
+</html>

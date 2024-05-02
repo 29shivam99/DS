@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    // IN ARRAYS
+    let [a, b] = [1, 2, 34, 5, 667];
+    console.log(a, b);
+
+    const [c, , , d] = [1, 2, 34, 5, 667];
+    console.log(c, d);
+
+    const [e = 11, f = 22] = [1, 2, 34, 5, 667];
+    console.log(e, f);
+
+    const [g, h, i] = [1, 2];
+    console.log(g, h, i);
+
+    const [j, k, , [l, m]] = [1, 2, 4, [6, 9]];
+    console.log(j, k, l, m);
+
+    // swapping
+    [a, b] = [b, a]; //for this a,b have to be non const that is let
+    console.log(a, b);
+
+    //changing values of variables
+    [a, b] = [25, 50];
+    console.log(a, b);
+
+    function fn() {
+      return [1, 2, 4, 5];
+    }
+
+    const [x, y, z, w] = fn();
+    console.log(x, y, z, w);
+
+    //IN OBJECTS
+
+    const { fname, age } = { fname: "dsaasa", age: 122 };
+    console.log(fname, age);
+
+    const ob = {
+      finame: "sasas",
+      lname: "salklda",
+      age: 12,
+      hobbies: ["asas", "sa", "ada", "ada"],
+    };
+
+    const { lname, finame, Myskills } = ob; //order doesnt matter in OBJ destrcturing
+    // also notice in our object we did not have Myskill named key but we were able to use MySkills in destrc. and its default value will be taken as undefined
+
+    console.log(lname, finame, Myskills);
+
+    const { hobbies: myHobbies, finame: firstName } = ob; // u can give keys the name u want by using : then name that u want to give
+    //console.log(hobbies); //wil give error
+
+    console.log(myHobbies, firstName);
+
+    //adding default values and also adding default values to keys whose name we changed
+    //also if we dont have a key in obj still we can give it a default value
+    const {
+      fname: myFirstName,
+      lname: myLastName = "Mishra",
+      city = "Varanasi",
+      skills = ["c++", "JS"],
+    } = {
+      lname: "kumar",
+      city: "kanpur",
+      fname: "raju",
+      age: 23,
+    };
+
+    console.log(myFirstName, skills);
+
+    //Mutating variables -> differnt from arrays
+
+    let first = 12;
+    let second = 23;
+    console.log(first, second);
+    const obj2 = { first: 25, second: 56 };
+    // {first , second} = obj2 ;logically this statement is right nut we will get syntax error so do below
+
+    ({ first, second } = obj2);
+
+    console.log(first, second);
+
+    //nested objects
+
+    const {
+      hours: { open: op, close: cl },
+    } = { hours: { open: "monday", close: "Sunday" } };
+
+    console.log(op, cl);
+
+    //console.log(hours); //why is it giving error
+
+    //destructuring in Functions parameters
+
+    //direct obj passed
+    const print = function (obj) {
+      console.log(obj.gender, obj.age);
+    };
+
+    print({ gender: "m", age: 22 });
+
+    //destructured
+    const printDes = function ({ gender, age }) {
+      console.log(gender, age);
+    };
+
+    printDes({ gender: "m", age: 22 });
+
+    //destructured and key's name changed
+    const printDesDef = function ({ gender: MyGender, age: MyAge }) {
+      console.log(MyGender, MyAge);
+    };
+
+    printDesDef({ gender: "m", age: 22 });
+
+    //destructured and default values
+    const printDesval = function ({ gender = "m", age: myAge = 10 }) {
+      console.log(gender, myAge);
+    };
+    printDesval({ age: 22 });
+  </script>
+  <body>
+    <h1>Welcome to JS</h1>
+  </body>
+</html>

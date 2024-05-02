@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //foreadh accepts a callback which has 3 parameters and these are item, ind, arr
+
+      const arr = [1, 1, 2, 23, 212, 65, 12];
+      arr.forEach(function (item, i, ar) {
+        console.log(item, i, ar);
+      });
+
+      //arrow fn
+
+      arr.forEach((item, i, ar) => console.log(item));
+
+      //with maps
+
+      const mp = new Map([
+        ["apple", 120],
+        ["orange", 60],
+      ]);
+
+      mp.forEach();
+    </script>
+  </body>
+</html>

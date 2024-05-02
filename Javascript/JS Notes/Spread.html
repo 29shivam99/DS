@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //we can use spread on all operators
+      const arr = [1, 2, 3, 4];
+
+      //spread created shallow copy
+      const arrNew = [...arr];
+
+      const fname = "Shivam";
+      const letters = [...fname, " ", "M."];
+
+      console.log(letters);
+
+      const fn = function (a, b, c) {
+        console.log(a, b, c);
+      };
+
+      const passArr = [2, 3, 4];
+      fn(...passArr);
+
+      const fn2 = function (a, b, c, d, e) {
+        console.log(a, b, c, d, e);
+      };
+      fn2(...passArr); //see all variables after c will be undefined
+
+      //spread in objects
+
+      const ob = { founded: 1990, owner: "Ryan" };
+
+      const ob2 = { ceo: "Rick", ...ob, popularity: "high", locations: [] };
+
+      console.log(ob2);
+
+      //shallow copy of objects
+
+      const ob3 = { ...ob };
+      console.log(ob3);
+    </script>
+  </body>
+</html>
