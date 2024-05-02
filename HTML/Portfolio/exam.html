@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Html Exam</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Contact</li>
+        <li>Main Menu</li>
+        <li>Purchase</li>
+      </ul>
+    </nav>
+
+    <main>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, maxime
+        quo? Fugit veniam porro sapiente autem qui! Nemo recusandae commodi fuga
+        architecto fugit dolorem aperiam veniam cum itaque dignissimos. Dolorum
+        qui amet mollitia voluptatibus odio dolores! Esse nulla distinctio quos
+        accusamus, voluptatem quod maiores odit qui quibusdam. Quae, quod eius.
+      </p>
+
+      <img
+        src="https://unsplash.com/photos/high-angle-photo-of-assorted-color-plastic-balls-9IBqihqhuHc"
+        alt="image of big mart supermarket"
+      />
+      <a href="https://www.wikipedia.org/" target="_blank">Visit Wikipedia </a>
+      <iframe src="https://www.wikipedia.org/" height="400" width="400">
+      </iframe>
+
+      <!-- <audio
+        controls
+        loop
+        src="/Images/BOLERO - Elvish Yadav & Manisha Rani  Preetinder  Asees Kaur  Rajat Nagpal  Babbu  Anshul Garg.mp3"
+        autoplay
+      ></audio> -->
+
+      <table>
+        <thead>
+          <tr>
+            <th>Header1</th>
+            <th>Header2</th>
+            <th>Header3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data1</td>
+            <td>Data2</td>
+            <td>Data3</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <footer></footer>
+
+    <script>
+      setTimeout(() => {
+        console.log("Hello");
+      }, 1000);
+
+      let str = "hello my name is shivam mishra";
+      let reversedStr = "";
+      console.log(reversedStr);
+      //reversedStr
+
+      for (let i = str.length; i >= 0; i--) {
+        console.log(reversedStr);
+        reversedStr += str[i];
+      }
+      console.log(reversedStr);
+
+      let total = 0;
+      for (let i = 1; i <= 6; i++) {
+        total += i;
+      }
+      console.log(total);
+      console.log((6 * (6 + 1)) / 2);
+
+      ////////////////////////////////////////////////////////////////////////////////////////
+
+      function foo(num) {
+        console.log("foo: " + num);
+        this.count++;
+      }
+      foo.count = 0;
+      var i;
+      for (i = 0; i < 10; i++) {
+        if (i > 5) {
+          foo(i);
+        }
+      }
+      console.log(foo.count);
+
+      /////////////////////////////////
+
+      let age = 23;
+      console.log(age);
+
+      age += 4;
+
+      age = `$` + age;
+      console.log(age);
+
+      var a = "shivam";
+      console.log(typeof a);
+
+      let obj = {
+        name: 12,
+        age: 22,
+      };
+
+      let variable = "age";
+      console.log(obj[variable]); // 22
+      //console.log(obj.variable); // undefined
+
+      let ob;
+
+      ob[a]++;
+      ob[a]++;
+      ob[b]++;
+      ob[b]++;
+
+      console.log(ob[a], ob[b]);
+    </script>
+  </body>
+</html>
+
+<!-- HTML EXAM  
+  create a html webpage with title as html exam
+  create the structure of html with nav, main page and footer
+  inject a script tag in html which has a settomeout of 1 sec which prints hello
+  inject an audio tag which autoplays a mp3 in loop
+  create an iframe which injects google.com in it
+  inside the main have para, img and a link
+  link should open on a new page
+-->

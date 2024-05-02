@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .flex-container {
+        display: flex;
+
+        /* there are many flex dirn like row, column etc */
+        flex-direction: row;
+
+        /* the below line is for aligning the items on the CROSS AXIS */
+        align-items: center; 
+
+        /* the below line is for aligning the items on the MAIN AXIS */
+        justify-content: center;
+
+        /* 50vh means half of the viewport i guess, please google it */
+        height: 50vh;
+
+        background-color: antiquewhite;
+
+        /* below is also one combination that displays column of items in center */
+        /* flex-direction: row;
+        align-items: center; */
+      }
+
+      .item {
+        background-color: rgba(242, 242, 242, 0.792);
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        border: 1px solid #333;
+        width: 200px;
+      }
+
+      /* below code is if u want only item1 to be aligned at top in cross axis */
+
+      /* .item1{
+        align-self: flex-start;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="item item1">
+        <h3>item1</h3>
+      </div>
+      <div class="item item2">
+        <h3>item2</h3>
+      </div>
+      <div class="item item3">
+        <h3>item3</h3>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* These are not used much nowadays bcoz of their responsivesness in mobile */
+      body {
+        height: 3000px;
+      }
+      #out-box {
+        position: relative;
+        background-color: #333;
+        width: 200px;
+        height: 200px;
+      }
+      #box1 {
+        position: relative;
+        top: 20px;
+        left: 20px;
+        background-color: red;
+        width: 50px;
+        height: 50px;
+        z-index: 1;
+        /* if u dont use z-index 1 then the red box will hide , as z-index can be -1 or 1 where -1 means red will hide by grey box and 1 means red will hide grey part */
+      }
+      #box2 {
+        position: absolute;
+        background-color: green;
+        width: 50px;
+        height: 50px;
+        top: 50px;
+        left: 100px;
+      }
+      #box3 {
+        position: absolute;
+        background-color: blue;
+        width: 50px;
+        height: 50px;
+        top: 20px;
+        left: 50px;
+      }
+      #box4 {
+        position: fixed;
+        /* even if u move / scroll page this will be fixed at its position also see the purple box gets hidden buy this  when using fixed position*/
+        background-color: yellow;
+        width: 50px;
+        height: 50px;
+      }
+      #box5 {
+        background-color: purple;
+        width: 50px;
+        height: 50px;
+      }
+      #box6 {
+        position: sticky;
+        /* not clear how it works */
+        top: 0;
+        background-color: pink;
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1"></div>
+
+    <div id="out-box">
+      <div id="box2"></div>
+      <div id="box3"></div>
+    </div>
+
+    <div id="box4"></div>
+    <div id="box5"></div>
+    <div id="box6"></div>
+  </body>
+</html>

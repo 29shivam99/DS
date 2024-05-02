@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      /* we cant add margins and paddings auto prop to inline elements */
+      /* Hence in order to center an image u need to do display: block; then do margin: auto  */
+
+      /* list items are block element so u cant place them horizontally automatically , u need to do following */
+
+      li {
+        display: inline;
+        padding-right: 20px;
+      }
+
+      /* U cant use width prop with inline elements , that is why below code doesnt work for placing divs horizontally*/
+
+      /* .div {
+        display: inline;
+        width: 30%;
+        border: 2px solid #333;
+      } */
+
+      /* u need to use inline-block in above code */
+
+      .div {
+        display: inline-block;
+        width: 30%;
+        /* border: .5px solid #333; */
+        padding: 20px;
+        background-color: #f4f4f4;
+      } 
+
+    </style>
+  </head>
+  <body>
+
+    <ul>
+      <li><a href="#""> home </a></li>
+      <li><a href="#""> home </a></li>
+      <li><a href="#""> home </a></li>
+      <li><a href="#""> home </a></li>
+    </ul>
+    <div class="div">
+      <h4>Heading</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+        explicabo rem consectetur quaerat ipsum quos atque maxime nisi corrupti
+        voluptatum.
+      </p>
+    </div>
+    <div class="div">
+      <h4>Heading</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+        explicabo rem consectetur quaerat ipsum quos atque maxime nisi corrupti
+        voluptatum.
+      </p>        
+    </div>
+    <div class="div">
+      <h4>Heading</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+        explicabo rem consectetur quaerat ipsum quos atque maxime nisi corrupti
+        voluptatum.
+      </p>
+    </div>
+
+    
+  </body>
+</html>

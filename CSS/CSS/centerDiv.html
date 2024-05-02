@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        /* width: 950px;    the issue with width is that when u reduce the size of viewport then wordds dont get wrap , rather u have to scroll horizonatlly to see the content . So use max-width*/
+        max-width: 950px;
+        margin: 10px auto;
+      }
+
+      .box {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #333;
+        margin-bottom: 10px;
+      }
+
+      .box p {
+        text-align: left;
+        text-align: right;
+        text-align: center;
+        text-align: justify; /*equal spaces on both sides  */
+
+        /* in text align the last value is used  */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box" id="box-1">
+        <h4>Hello</h4>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, quos
+          nemo vitae ipsum modi similique accusamus inventore dolorem blanditiis
+          sed?
+        </p>
+      </div>
+      <div class="box" id="box-1">
+        <h4>Hello</h4>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, quos
+          nemo vitae ipsum modi similique accusamus inventore dolorem blanditiis
+          sed?
+        </p>
+      </div>
+      <div class="box" id="box-1">
+        <h4>Hello</h4>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde, quos
+          nemo vitae ipsum modi similique accusamus inventore dolorem blanditiis
+          sed?
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

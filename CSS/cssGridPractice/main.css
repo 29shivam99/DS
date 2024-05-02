@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Delicious Handrawn", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "left-side main right-side"
+    "footer footer footer";
+  grid-template-columns: 2.4fr 4fr 1.5fr;
+  grid-auto-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+nav {
+  height: 200px;
+  grid-area: header;
+  background-color: rgb(31, 33, 34);
+}
+
+main {
+  height: 1000px;
+  overflow: auto;
+  grid-area: main;
+  background-color: rgb(53, 145, 225);
+}
+
+.left-side {
+  grid-area: left-side;
+  background-color: rgb(60, 176, 21);
+}
+
+.right-side {
+  grid-area: right-side;
+  background-color: rgb(212, 82, 35);
+}
+
+footer {
+  height: 200px;
+  grid-area: footer;
+  background-color: rgb(110, 15, 99);
+}

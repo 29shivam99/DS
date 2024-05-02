@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Position</title>
+
+  <style>
+      .container{
+        height : 1000px;
+        width : 400px;
+        background-color: bisque;
+        margin-top: 500px;
+        margin-left: 400px;
+      }
+
+      .cont2{
+        height : 1000px;
+        width : 400px;
+        background-color: aquamarine;
+        margin-left : 400px;
+      }
+
+      .box1{
+        height : 50px;
+        width : 50px;
+        background-color: red;
+        position: fixed;
+        top: 10px;
+        left : 10px;
+      }
+      .box2{
+        height : 50px;
+        width : 50px;
+        background-color: purple;
+        position: sticky;
+        top: 20px;
+      }
+      .box3{
+        height : 50px;
+        width : 50px;
+        background-color: yellow;
+        position: relative;
+        top: 500px;
+        left: 200px;
+      }
+      .box4{
+        height : 50px;
+        width : 50px;
+        background-color: pink;
+        position: absolute;
+        top : 100px;
+        left : 150px;
+      }
+  </style>
+</head>
+<body>
+  
+<!-- this is really important thing in CSS -->
+
+  <div class="container">
+    <!-- always fixed wrt view port -->
+    <div class="box1">fixed</div>
+
+    <!--  it will be like the relative for some time and when the right position comes it starts to behave as fixed-->
+    <div class="box2">sticky</div>
+    
+    <!-- it is positioned relative to the parent element -->
+    <div class="box3">relative</div>
+
+    <!--  this behaves relative wrt to the first parent element which is absolute, if it finds none such element then goes to top most html elememnt i.e  body-->
+    <div class="box4">absol</div>
+  </div>
+
+  <div class="cont2">
+
+  </div>
+</body>
+</html>                                                   

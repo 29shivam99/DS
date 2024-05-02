@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .divIn{
+      background-color: aliceblue;
+      width: 50%;
+      height: 100%;
+      position: relative;
+      
+      
+    }
+    .divOut{
+      background-color: aqua;
+      height : 600px;
+      width: 400px;
+    }
+
+    .divIn2{
+      background-color: aliceblue;
+      width: 25vw;
+      height: 25vh;
+      position: relative;
+    }
+    .divOut2{
+      background-color: aqua;
+      height : 50vh;
+      width: 50vw;
+    }
+  </style>
+</head>
+<body>
+  <!-- percentage is relative to the parent, so 50% assigned to a divIn,  where this divIn is child of another divOut then  divIn will take 50% of DivOut   -->
+
+  <div class="divOut">
+    <div class="divIn">
+
+    </div>
+  </div>
+
+  <!-- vw is absolute value therefore when u say 40vw means 40% of width screen  -->
+  <!-- vh is also  absolute value therefore when u say 40vh means 40% of height screen  -->
+
+  <div class="divOut2">
+    <div class="divIn2">
+
+    </div>
+  </div>
+
+  <!-- when we define the font size as absolute value like the px then the issue is if user wants to increase the text size using the settings in their brwoser or phone then this value wont increase or decrease, hence we should use relative units like em or rem -->
+
+
+  <!-- vvvvvIMP for em  -->
+
+  <!-- em is very complex bcoz suppose the em which u set for h1 is 2em and h1 is child of div, for div u set the font to 2 em and div is child of body for which u set the font size to be 2 em . Now u might expect the size of h1 to be 2em but it wont be the case. The font size of h1 will be calculated like => move on to parent of h1 till u find absolute val of font for any parent (if none of the parent has absolute font size then u will reach till html which is root for all the elements and html has a default font size of 1em/16px), and keep multiplying the em of all parent till the parent with absolute font size, like in our example (h1*div*body*html root) => 2*2*2*1 = 8em = 96px font sizefor h1  -->
+
+  <!-- Hence best practice is to use rem , which means root em,  meaning if for h1 (which is child of div which is child of body) we defined font size as 2rem then font size of h1 = font size of h1 * font size of html root = 2*1em = 2em = 32 px--> 
+
+  <!-- Note- u can change the html root font size like below in CSS -->
+
+  <!-- 
+    html{
+      font-size : 5em;
+    }
+   -->
+  
+</body>
+</html>
