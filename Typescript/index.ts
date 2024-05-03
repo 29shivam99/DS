@@ -371,8 +371,8 @@ class Person2 {
 
 class Boy extends Person1 {}
 
-let boy = new Boy("shivam", 23);
+let boy2 = new Boy("shivam", 23);
 // even though private props are not inherited but still we can see boy has name and age bcoz boy does not have its own constructor and hence using constructor of parent and as a result the constructor props are generated for boy also
-console.log(boy);
+console.log(boy2);
 
-boy.displayName;
+boy2.displayName;
