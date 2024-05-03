@@ -144,16 +144,16 @@ interface Person {
   hobbies: string[];
 }
 
-let person4: Person = {
-  name: "shivam",
-  age: 24,
-  hobbies: ["reading", "coding"],
-};
+// let person4: Person = {
+//   name: "shivam",
+//   age: 24,
+//   hobbies: ["reading", "coding"],
+// };
 
-let person5: Person = {
-  name: "shivam",
-  hobbies: ["ksdjkjsnsdf"],
-};
+// let person5: Person = {
+//   name: "shivam",
+//   hobbies: ["ksdjkjsnsdf"],
+// };
 
 // let person6: Person = {
 //   // name: 'shivam',
