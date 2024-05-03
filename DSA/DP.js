@@ -199,3 +199,204 @@ class Solution {
     return this.fn(W, wt, val, n, 0, memo);
   }
 }
+
+// minimum path sum
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+
+function fn(grid, i, j, m, n, memo) {
+  // BC
+  if (i == m - 1 && j == n - 1) return grid[i][j];
+  // recursive
+  if (memo[i][j] !== -1) return memo[i][j];
+
+  let answerFromRight = Number.MAX_SAFE_INTEGER;
+  if (j + 1 < n) answerFromRight = fn(grid, i, j + 1, m, n, memo);
+
+  let answerFromDown = Number.MAX_SAFE_INTEGER;
+  if (i + 1 < m) answerFromDown = fn(grid, i + 1, j, m, n, memo);
+
+  memo[i][j] = grid[i][j] + Math.min(answerFromRight, answerFromDown);
+  return grid[i][j] + Math.min(answerFromRight, answerFromDown);
+}
+
+var minPathSum = function (grid) {
+  let m = grid.length,
+    n = grid[0].length;
+  let memo = Array.from({ length: m }, () => Array(n).fill(-1));
+  console.log(memo);
+  return fn(grid, 0, 0, m, n, memo);
+};
+
+// https://leetcode.com/problems/word-break/description/
+
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+
+function fn(s, mp, ind, memo) {
+  if (ind >= s.length) return true;
+  if (memo[ind] != -1) {
+    return memo[ind];
+  }
+  let substr = "";
+  let ans = false;
+  for (let i = ind; i < s.length; i++) {
+    let tmp = false;
+    substr = substr + s[i];
+    if (mp.get(substr)) {
+      tmp = true;
+      tmp = tmp && fn(s, mp, i + 1, memo);
+    }
+    ans = ans || tmp;
+    if (ans) {
+      memo[ind] = 1;
+      return memo[ind];
+    }
+  }
+  memo[ind] = ans;
+  return memo[ind];
+}
+
+var wordBreak = function (s, wordDict) {
+  let map = new Map();
+  let memo = [];
+  for (let i = 0; i < s.length + 1; i++) {
+    memo.push(-1);
+  }
+  for (let word of wordDict) {
+    map.set(word, 1);
+  }
+  return fn(s, map, 0, memo);
+};
+
+//leetcode.com/problems/minimum-path-sum/
+//Minimum path sum
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+
+https: function fn(grid, i, j, m, n, memo) {
+  // BC
+  if (i == m - 1 && j == n - 1) return grid[i][j];
+  // recursive
+  if (memo[i][j] !== -1) return memo[i][j];
+
+  let answerFromRight = Number.MAX_SAFE_INTEGER;
+  if (j + 1 < n) answerFromRight = fn(grid, i, j + 1, m, n, memo);
+
+  let answerFromDown = Number.MAX_SAFE_INTEGER;
+  if (i + 1 < m) answerFromDown = fn(grid, i + 1, j, m, n, memo);
+
+  memo[i][j] = grid[i][j] + Math.min(answerFromRight, answerFromDown);
+  return grid[i][j] + Math.min(answerFromRight, answerFromDown);
+}
+
+var minPathSum = function (grid) {
+  let m = grid.length,
+    n = grid[0].length;
+  let memo = Array.from({ length: m }, () => Array(n).fill(-1));
+  console.log(memo);
+  return fn(grid, 0, 0, m, n, memo);
+};
+
+//https://leetcode.com/problems/coin-change/description/
+//coin change problem
+//my approach memoization -
+var coinChange = function (coins, amount) {
+  let result = countCoinChange(coins, amount);
+  return result === Infinity ? -1 : result;
+};
+
+const countCoinChange = (coins, amount, memo = {}) => {
+  if (amount === 0) return 0;
+  if (amount < 0) return Infinity;
+  if (memo[amount] !== undefined) return memo[amount];
+
+  let min = Infinity;
+
+  for (let coin of coins) {
+    const restAmount = amount - coin;
+    min = Math.min(countCoinChange(coins, restAmount, memo) + 1, min);
+  }
+
+  memo[amount] = min;
+  return memo[amount];
+};
+
+//https://leetcode.com/problems/partition-equal-subset-sum/
+// partition equal subset
+
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+function fn(nums, sum, index, memo, tar) {
+  if (sum === tar) return true;
+  if (index === nums.length - 1) return false;
+  if (memo[sum][index] !== -1) return memo[sum][index];
+
+  let takeCurrent = fn(nums, sum + nums[index], index + 1, memo, tar);
+  let dontTakeCurrent = fn(nums, sum, index + 1, memo, tar);
+
+  if (takeCurrent || dontTakeCurrent) memo[sum][index] = 1;
+  else memo[sum][index] = 0;
+  return takeCurrent || dontTakeCurrent;
+}
+
+var canPartition = function (nums) {
+  let sum = 0;
+  for (let num of nums) sum += num;
+  if (sum % 2 != 0) return false;
+  let memo = Array.from({ length: sum + 1 }, () =>
+    Array(nums.length + 1).fill(-1)
+  );
+  return fn(nums, 0, 0, memo, sum / 2);
+};
+
+//https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/
+//minimum cost tocut a stick
+
+/**
+ * @param {number} n
+ * @param {number[]} cuts
+ * @return {number}
+ */
+function fn(cuts, start, end, mp) {
+  let positions = `${start} to ${end}`;
+  if (mp.has(positions) || mp.get(positions) === 0) return mp.get(positions);
+
+  let minCost = Number.MAX_SAFE_INTEGER;
+
+  for (let i = 0; i < cuts.length; i++) {
+    if (cuts[i] > start && cuts[i] < end) {
+      const cost = end - start;
+      const leftCost = fn(cuts, start, cuts[i], mp);
+      const rightCost = fn(cuts, cuts[i], end, mp);
+      minCost = Math.min(minCost, cost + leftCost + rightCost);
+    }
+  }
+  if (minCost === Number.MAX_SAFE_INTEGER) {
+    mp.set(positions, 0);
+    return 0;
+  }
+
+  mp.set(positions, minCost);
+  return minCost;
+}
+
+var minCost = function (n, cuts) {
+  let s = 0,
+    e = n;
+  let mp = new Map();
+  cuts.sort();
+  let ans = fn(cuts, s, e, mp);
+  return ans;
+};
