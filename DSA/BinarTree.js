@@ -218,3 +218,304 @@ class Solution {
     return result;
   }
 }
+
+//https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
+//Revise- I could not solve
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+function topViewBFS(root, mp) {
+  if (!root) return;
+  let q = [];
+  q.push({ node: root, hLevel: 0 });
+  while (q.length) {
+    let s = q.length;
+    let nodeObj = q.shift();
+    let nodeCurr = nodeObj.node;
+    let hLevelCurr = nodeObj.hLevel;
+    if (!mp.has(hLevelCurr)) {
+      mp.set(hLevelCurr, [nodeCurr.val]);
+    } else mp.set(hLevelCurr, [...mp.get(hLevelCurr), nodeCurr.val]);
+    if (nodeCurr.left) q.push({ node: nodeCurr.left, hLevel: hLevelCurr - 1 });
+    if (nodeCurr.right)
+      q.push({ node: nodeCurr.right, hLevel: hLevelCurr + 1 });
+  }
+}
+var verticalTraversal = function (root) {
+  let horizontalLevel = new Map();
+  topViewBFS(root, horizontalLevel);
+  let result = [...horizontalLevel.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([key, value]) => value);
+  //console.log(result);
+  return result;
+};
+
+// better approach
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var verticalTraversal = function (root) {
+  const map = {};
+  const dfs = (node, x = 0, y = 0) => {
+    if (!node) return;
+    if (map[x] === undefined) {
+      map[x] = {};
+    }
+    if (map[x][y] === undefined) {
+      map[x][y] = [];
+    }
+    map[x][y].push(node.val);
+    dfs(node.left, x - 1, y + 1);
+    dfs(node.right, x + 1, y + 1);
+  };
+  dfs(root);
+  const result = [];
+  const x = Object.keys(map).sort((a, b) => a - b);
+  for (const i of x) {
+    const column = [];
+    const y = Object.keys(map[i]).sort((a, b) => a - b);
+    for (const j of y) {
+      column.push(...map[i][j].sort((a, b) => a - b));
+    }
+    result.push(column);
+  }
+  return result;
+};
+
+//https://leetcode.com/problems/maximum-width-of-binary-tree/description/
+// Maximum Width of Binary Tree
+// Revise- I could not solve it
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+function topViewBFS(root, mp) {
+  if (!root) return;
+  let q = [];
+  q.push({ node: root, hLevel: 0, vLevel: 0 });
+  while (q.length) {
+    let s = q.length;
+    let nodeObj = q.shift();
+    let nodeCurr = nodeObj.node;
+    let hLevelCurr = nodeObj.hLevel;
+    let vLevelCurr = nodeObj.vLevel;
+    if (!mp.has(vLevelCurr)) {
+      mp.set(vLevelCurr, [hLevelCurr]);
+    } else mp.set(vLevelCurr, [...mp.get(vLevelCurr), hLevelCurr]);
+    if (nodeCurr.left)
+      q.push({
+        node: nodeCurr.left,
+        hLevel: hLevelCurr - 1,
+        vLevel: vLevelCurr + 1,
+      });
+    if (nodeCurr.right)
+      q.push({
+        node: nodeCurr.right,
+        hLevel: hLevelCurr + 1,
+        vLevel: vLevelCurr + 1,
+      });
+  }
+}
+var widthOfBinaryTree = function (root) {
+  let horizontalLevel = new Map();
+  topViewBFS(root, horizontalLevel);
+  let result = [...horizontalLevel.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([key, value]) => value);
+  console.log(horizontalLevel);
+  maxWidth = -1;
+  for (let [key, value] of horizontalLevel) {
+    let width = value[value.length - 1] - value[0];
+    maxWidth = Math.max(maxWidth, width);
+  }
+  return maxWidth;
+};
+
+// better
+
+//BFS
+const widthOfBinaryTree = (root) => {
+  let l = [],
+    r = [],
+    queue = [[root, 0, 0]];
+  while (queue.length) {
+    let [node, level, i] = queue.shift();
+    if (!node) continue;
+    (l[level] = l[level] || i), (r[level] = i - l[level]);
+    queue.push(
+      [node.left, level + 1, i * 2 - 1],
+      [node.right, level + 1, i * 2]
+    );
+  }
+  return Math.max(...r) + 1;
+};
+
+//DFS
+const widthOfBinaryTree = (root) => {
+  let l = [],
+    r = [];
+  const f = (node, level, i) => {
+    if (!node) return;
+    (l[level] = l[level] || i), (r[level] = i - l[level]);
+    f(node.left, level + 1, i * 2 - 1), f(node.right, level + 1, i * 2);
+  };
+  f(root, 0, 0);
+  return Math.max(...r) + 1;
+};
+
+//https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+//Level order traversal
+
+var levelOrder = function (root) {
+  let q = [root],
+    ans = [];
+  while (q[0]) {
+    let qlen = q.length,
+      row = [];
+    for (let i = 0; i < qlen; i++) {
+      let curr = q.shift();
+      row.push(curr.val);
+      if (curr.left) q.push(curr.left);
+      if (curr.right) q.push(curr.right);
+    }
+    ans.push(row);
+  }
+  return ans;
+};
+
+//https://leetcode.com/problems/maximum-depth-of-binary-tree/
+//Maximum Depth of Binary Tree
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+
+function helper(root, level, maxLen) {
+  if (!root) return;
+  // let maxLeft = maxDepth(root.left);
+  // let maxRight = maxDepth(root.right);
+  // return max(maxLeft, maxRight)+1;
+
+  if (maxLen[0] < level) maxLen[0] = level;
+  helper(root.left, level + 1, maxLen);
+  helper(root.right, level + 1, maxLen);
+  return;
+}
+
+var maxDepth = function (root) {
+  let maxLen = [-1];
+  helper(root, 0, maxLen);
+  return maxLen[0] + 1;
+};
+
+//https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+//Binary Tree Zigzag Level Order Traversal
+
+var zigzagLevelOrder = function (root) {
+  if (!root) return [];
+
+  let result = [],
+    q = [root],
+    level = 0;
+
+  while (q.length) {
+    let size = q.length,
+      currLevel = [];
+    for (let i = 0; i < size; i++) {
+      let node = q.shift();
+      currLevel.push(node.val);
+      if (node.left) q.push(node.left);
+      if (node.right) q.push(node.right);
+    }
+    if (level % 2 === 1) currLevel.reverse();
+    result.push(currLevel);
+    level++;
+  }
+  return result;
+};
+
+//https://leetcode.com/problems/same-tree/description/
+//Same Tree
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+
+function DFS(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+
+  return p.val === q.val && DFS(p.left, q.left) && DFS(p.right, q.right);
+}
+
+var isSameTree = function (p, q) {
+  return DFS(p, q);
+};
+
+//https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
+//Lowest Common Ancestor of a Binary Tree
+
+var lowestCommonAncestor = function (root, p, q) {
+  const dfs = (node) => {
+    if (node === null) {
+      return null;
+    }
+
+    if (node === p || node === q) {
+      return node;
+    }
+
+    const left = dfs(node.left);
+    const right = dfs(node.right);
+
+    return left && right ? node : left || right;
+  };
+
+  return dfs(root);
+};
