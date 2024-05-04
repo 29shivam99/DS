@@ -289,3 +289,126 @@ class SubAccount extends Account {
 
 let subacc = new SubAccount();
 // console.log(subacc.#movement); // error
+
+//////
+// let myName = "John";
+// let age = 30;
+// let salary = 1000;
+
+// function printPersonDetails(name, age, salary) {
+//   console.log("Name: " + name + ", Age: " + age + ", Salary: " + salary);
+// }
+
+// printPersonDetails(myName, age, salary);
+
+// const person = {
+//   name: "John",
+//   age: 30,
+//   salary: 1000,
+//   printPersonDetails: function () {
+//     console.log(
+//       "Name: " + this.name + ", Age: " + this.age + ", Salary: " + this.salary
+//     );
+//   },
+// };
+
+// person.printPersonDetails();
+
+// Abstraction & Encapsulation (partially)
+
+function Employee(name, age, salary) {
+  this.name = name;
+  this.age = age;
+  this.salary = salary;
+  let rating = 90;
+
+  let calculateSalary = () => {
+    let finalSalary = this.salary + salary * (rating / 100);
+    console.log('Final Salary: ' + finalSalary);
+    return finalSalary;
+  };
+
+  this.printEmployeeDetails = function () {
+    console.log(
+      'Name: ' +
+        this.name +
+        ', Age: ' +
+        this.age +
+        ', Salary: ' +
+        calculateSalary()
+    );
+  };
+}
+
+const employee = new Employee('John', 30, 1000);
+employee.printEmployeeDetails();
+// employee.calculateSalary(); //Private method cannot be accessed
+
+// Encapsulation
+// class Student {
+//   #name = ""; // truly private
+
+//   set studentName(name) {
+//     this.#name = name;
+//   }
+
+//   get studentName() {
+//     return this.#name;
+//   }
+// }
+
+// const student = new Student();
+// student.studentName = "John";
+// console.log(student);
+// console.log(student.studentName);
+
+// // Polymorphism
+// class Shape {
+//   draw() {
+//     console.log("Drawing a shape");
+//   }
+// }
+
+// const shape = new Shape();
+// shape.draw();
+
+// class Rectangle extends Shape {
+//   draw() {
+//     console.log("Drawing a rectangle");
+//   }
+// }
+
+// const rect = new Rectangle();
+// rect.draw();
+
+// class Circle extends Shape {
+//   draw() {
+//     console.log("Drawing a circle");
+//   }
+// }
+
+// const circle = new Circle();
+// circle.draw();
+
+class Counter {
+  // Private field
+  #count = 0;
+
+  // Public method to increment count
+  increment() {
+    this.#count++;
+  }
+
+  // Public method to get current count
+  get count() {
+    return this.#count;
+  }
+}
+
+const counter = new Counter();
+
+counter.increment();
+console.log(counter.getCount()); // Output: 1
+
+// Cannot perform
+//console.log(counter.#count); // Error
