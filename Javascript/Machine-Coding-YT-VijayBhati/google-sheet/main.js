@@ -6,9 +6,10 @@ let docContainer = document.querySelector(".doc-container");
 let recentSelectedCell;
 
 const cellEvents = [
-  { event: "focusin", handler: handleCellFocusin },
+  //{ event: "focusin", handler: handleCellFocusin },
   { event: "focusout", handler: handleCellFocusout },
   { event: "dblclick", handler: handleCellDoubleclick },
+  { event: "click", handler: handleSingleClick },
 ];
 
 // on disabled input the click event does not register hence I used readonly.
@@ -61,6 +62,13 @@ function handleCellDoubleclick() {
   if (cell.dataset.index) {
     cell.removeAttribute("readonly");
     cell.classList.add("editable-cell");
+  }
+}
+
+function handleSingleClick() {
+  let cell = event.target;
+  if (cell.dataset.index) {
+    cell.focus();
   }
 }
 
