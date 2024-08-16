@@ -1,0 +1,83 @@
+.add-item-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.main {
+  display: flex;
+  gap: 10%;
+  justify-content: center;
+  padding: 20px;
+}
+
+.to-do-container,
+.completed-tasks-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 30%;
+  height: 400px;
+  padding: 20px;
+  box-shadow: 2px 2px 40px 5px rgb(236, 237, 244);
+}
+
+input {
+  border: 1px solid grey;
+  box-shadow: 0px 0px 1px 0.001px rgb(30, 31, 40);
+  height: 30px;
+  width: 240px;
+  border-radius: 10px;
+}
+
+.btn-search,
+.btn-add {
+  border: none;
+  width: 80px;
+  height: 35px;
+  background-color: pink;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.btn {
+  border: none;
+  /* width: 70px; */
+  height: 35px;
+  background-color: rgb(164, 249, 255);
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.to-do-container,
+.completed-tasks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+}
+
+.btn-search:hover,
+.btn-add:hover {
+  background-color: rgb(249, 144, 161);
+  transform: scale3d(1.07, 1.06, 1.5);
+}
+
+.list-to-do,
+.list-tasks-completed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: start;
+}
+
+.to-do-item {
+  display: flex;
+  gap: 16px;
+}
+
+.taskName {
+  width: 180px;
+  align-self: center;
+}

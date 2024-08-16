@@ -400,3 +400,48 @@ var minCost = function (n, cuts) {
   let ans = fn(cuts, s, e, mp);
   return ans;
 };
+
+//https://www.geeksforgeeks.org/problems/number-of-coins1824/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
+
+//Number of coins
+
+/**
+ * @param {number[]} coins
+ * @param {number} V
+ * @param {number} M
+ * @returns {number}
+ */
+
+class Solution {
+  fn(arr, sum, n, i, memo) {
+    // base
+    if (i === n) {
+      if (sum === 0) {
+        return 0;
+      } else {
+        return 10000000;
+      }
+    }
+    // recursive
+    if (memo[sum][i]) return memo[sum][i];
+
+    let pick = 10000000;
+    if (sum >= arr[i]) pick = 1 + this.fn(arr, sum - arr[i], n, i, memo);
+
+    let nPick = this.fn(arr, sum, n, i + 1, memo);
+
+    memo[sum][i] = Math.min(pick, nPick);
+    return Math.min(pick, nPick);
+  }
+
+  minCoins(coins, V, M) {
+    //your code here
+    let col = M + 1;
+    let row = V + 1;
+    let memo = Array.from({ length: row }, () => Array(col).fill(0));
+    let a = this.fn(coins, V, M, 0, memo);
+    //console.log(a);
+    if (a === 10000000) return -1;
+    return a;
+  }
+}

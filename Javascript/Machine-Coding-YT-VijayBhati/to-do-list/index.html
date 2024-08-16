@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO DO List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1 style="text-align: center">To Do List App</h1>
+    <div class="add-item-container">
+      <input class="add-item-input" />
+      <button class="btn-add" disabled>Add</button>
+    </div>
+    <div class="main">
+      <div class="to-do-container">
+        <h2 style="text-align: center; align-self: center">To DO</h2>
+        <div class="search-to-do">
+          <input class="to-do-search-input" />
+          <button class="btn-to-do-search btn-search">Search</button>
+        </div>
+        <div class="list-to-do"></div>
+      </div>
+
+      <div class="completed-tasks-container">
+        <h2 style="text-align: center; align-self: center">Completed</h2>
+        <div class="search-completed-tasks">
+          <input class="completed-tasks-search-input" />
+          <button class="btn-completed-tasks-search btn-search">Search</button>
+        </div>
+        <div class="list-tasks-completed"></div>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

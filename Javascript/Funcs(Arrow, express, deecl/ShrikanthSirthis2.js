@@ -1,68 +1,147 @@
-// Pure functions
-// Function composition
-// Immutability
-// Shared state
-// Side effects
+// console.log("Temporal Deadzone");
 
-// Different ways to create a function in JS
-// 1. Function declaration
-// 2. Function expression
-// 3. Arrow function
-
-// Pure function
-
-// A pure fucntion always returns the same value for a given input
-
-// const add = (a, b) => a + b;
-
-// console.log(add(1, 2));
-// console.log(add(1, 2));
-// console.log(add(1, 2));
-// console.log(add(1, 2));
-// console.log(add(1, 2));
-
-// // Impure functions
-// const randomAdd = (a, b) => Math.random() * a + b;
-
-// console.log(randomAdd(1, 2));
-// console.log(randomAdd(1, 2));
-// console.log(randomAdd(1, 2));
-// console.log(randomAdd(1, 2));
-// console.log(randomAdd(1, 2));
-// console.log(randomAdd(1, 2));
-
-// const add = function (a, b) {
-//   return a + b;
-// };
-
-// function add1(a, b) {
-//   return a + b;
+// {
+//   const rabbit = "I am a Rabbit";
+//   console.log(rabbit); // 1
 // }
 
-// const add2 = (a, b) => {
-//   return a + b;
+// console.log(rabbit); //2
+
+// {
+//   console.log(rabbit);
+//   const rabbit = "I am a Rabbit";
+// }
+
+// THIS
+
+// function foo() {
+//   var rabbit = "rabbit";
+//   this.printAnimal();
+// }
+
+// function printAnimal() {
+//   console.log(this);
+//   console.log(this.rabbit);
+// }
+
+// foo();
+
+// DEFAULT BINDING
+
+// var foo = function () {
+//   console.log("this in the inner scope", this);
+//   console.log(this);
 // };
 
-// const add3 = (a, b) => a + b;
+// foo();
 
-// // Imnmutability
-
-// const person = {
-//   name: "John",
-//   age: 20,
+// var foo1 = function () {
+//   console.log(this.rabbit);
 // };
 
-// person.name = "John Doe";
-// console.log(person);
+// console.log("this in the outer scope", this);
+// var rabbit = "I am a rabbit";
 
-// const immutableObject = Object.freeze({
-//   name: "John",
-//   age: 20,
-// });
+// foo1();
 
-// immutableObject.name = "John Doe";
+// function foo() {
+//   console.log(this.myName);
+// }
 
-// console.log(immutableObject);
+// var animal = {
+//   myName: "Animal",
+//   printObject: foo,
+// };
+
+// console.log(this);
+
+// var fn = animal.printObject;
+// fn();
+
+// animal.printObject();
+
+// const foo = (param) => {
+//   console.log("this--->", this);
+//   console.log(`Hello, ${param}, I am ${this.name}`);
+// };
+
+// var person = {
+//   name: "Shrikanth",
+//   greetme: foo.bind(this),
+// };
+
+// person.greetme("John");
+
+// const wishMe = person.greetme;
+// wishMe("John");
+
+// function foo() {
+//   console.log(this);
+//   console.log(this.name);
+// }
+
+// var person = {
+//   name: "Shrikanth",
+// };
+
+// const func = foo.bind(person);
+
+// func();
+
+// NEW BINDING
+
+// Constructor function
+// function Foo() {
+//   this.name = "Shrikanth constructor function";
+//   console.log(this);
+//   this.greetMe = function () {
+//     console.log(`Hello, I am ${this.name}`);
+//   };
+// }
+
+// class Foo1 {
+//   constructor() {
+//     this.name = "Shrikanth1 class";
+//     console.log(this);
+//   }
+
+//   greetMe = function () {
+//     console.log(`Hello, I am ${this.name}`);
+//   };
+// }
+
+// var obj = new Foo();
+// console.log(obj);
+// obj.greetMe();
+
+// var obj = new Foo1();
+// obj.greetMe();
+
+var foo = () => {
+  console.log(this === window);
+  console.log(this);
+};
+
+var person = {
+  name: "Shrikanth",
+};
+
+foo.bind(person)();
+foo.apply(person);
+foo.call(person);
+
+// foo();
+
+//////////////////////////////////////////////////////////////
+
+const immutableObject = Object.freeze({
+  name: "John",
+  age: 20,
+});
+
+immutableObject.name = "John Doe"; // no error but no change also
+
+console.log(immutableObject);
 
 // const state = {
 //   name: "John",
@@ -127,15 +206,21 @@
 // Function composition
 // higher order functions using function composition
 
-// function fn1(x) {
-//   return x + 1;
-// }
-// function fn2(x) {
-//   return x + 2;
-// }
-// const compose = (func1, func2) => (data) => func1(func2(data));
-// const composed = compose(fn1, fn2);
-// console.log(composed(2));
+function fn1(x) {
+  return x + 1;
+}
+function fn2(x) {
+  return x + 2;
+}
+const compose = (func1, func2) => (data) => func1(func2(data));
+const composed = compose(fn1, fn2);
+console.log(composed(2));
+
+// function composition using JS reduce
+
+const composer = function (...args) {
+  const arr = [...args];
+};
 
 // // Pure functions can be replaced by an exact value for a constant scenario
 // // Impure function

@@ -1,0 +1,31 @@
+.doc-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.row {
+  display: flex;
+  gap: 4px;
+  height: 40px;
+}
+
+.column {
+  border: 2px solid;
+  width: 80px;
+}
+
+.cell-input {
+  width: 80%;
+}
+
+.focussed-cell {
+  background-color: rgb(225, 241, 220);
+  border: 1px solid grey;
+}
+.editable-cell {
+  background-color: rgb(225, 245, 245);
+  color: black;
+}

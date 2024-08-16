@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+.star {
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.all-black-stars {
+  color: black;
+}
+
+/* .star:hover {
+  color: gold;
+} */

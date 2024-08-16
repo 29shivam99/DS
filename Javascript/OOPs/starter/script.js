@@ -1,4 +1,6 @@
 'use strict';
+
+// Function constructor begins=>
 const Person = function (firstName, lastName) {
   //instance properties
   this.fname = firstName;
@@ -26,17 +28,19 @@ console.log(boy.__proto__); // this will have same output as console.log(Person.
 
 console.log(boy.__proto__ === Person.prototype);
 
+console.log(boy.__proto__.constructor); // to get the constructor of an object
+
 //Imp line => Person.prototype is not the prototype of Person rather it is the prototype of all objects which are going to be created from Person constrcutor fn
 
 console.log(Person.prototype.isPrototypeOf(boy));
 console.log(Person.prototype.isPrototypeOf(Person));
 
-console.log(boy.hasOwnProperty('fname'));
+console.log(boy.hasOwnProperty('fname'), boy.hasOwnProperty('calcAge'));
 console.log(boy.hasOwnProperty('getName'));
 
 // all objects in JS has a prototype, object.prototype is top of prototype chain and its prototype is null hence object.__proto__ is null
 
-console.log(Object.__proto__);
+console.log(Object.prototype.__proto__);
 
 // CLASSES
 
@@ -84,8 +88,17 @@ console.log(ajay);
 ajay.age = 20;
 console.log(ajay.age);
 
+console.log(
+  ajay.hasOwnProperty('fname'),
+  ajay.hasOwnProperty('DOB'),
+  ajay.hasOwnProperty('hey'),
+  ajay.hasOwnProperty('age'),
+  ajay.hasOwnProperty('bye')
+);
+
 console.log(ajay.__proto__ === MyPerson.prototype);
-console.log(ajay.__proto__);
+console.log(ajay.__proto__, typeof ajay.__proto__);
+console.log(ajay.__proto__.constructor);
 
 // console.log(ajay.hey()); //error since static method can only be called from class and not object
 console.log(MyPerson.hey());
@@ -93,7 +106,7 @@ console.log(MyPerson.hey());
 MyPerson.bye();
 
 //classes are not hoisted
-//they are first class citizens i.e we can pass them in function arguments and can be returne from fn
+//they are first class citizens i.e we can pass them in function arguments and can be returned from fn
 // classes are executed in strict mode
 
 // all objects in JS can have getters and setters
@@ -155,8 +168,23 @@ function Dog(species, age, sound) {
   this.sound = sound;
 }
 
-// this is very important line. Without this we wont be able to link
+// this is very important line. Without this we wont be able to link prototype chain
 Dog.prototype = Object.create(Animal.prototype);
+console.log(
+  Dog.prototype === Animal.prototype,
+  Dog.prototype == Animal.prototype
+);
+
+// below is wrong way to set up the chain-
+// Directly setting Dog.prototype = Animal.prototype; will not properly set up the prototype chain for inheritance. Here's why:
+
+// Shared Prototype Object: If you set Dog.prototype directly to Animal.prototype, both Dog and Animal will share the same prototype object. Any changes made to Dog.prototype will also affect Animal.prototype, which can lead to unintended side effects. This is because both Dog.prototype and Animal.prototype will point to the same object in memory.
+
+// Loss of Unique Methods: If you add methods to Dog.prototype, they will also be added to Animal.prototype, and vice versa. This can cause issues if Dog and Animal are supposed to have different methods or behaviors.
+
+// Constructor Property: The constructor property on the prototype object will be incorrect. After setting Dog.prototype = Animal.prototype;, the constructor property on Dog.prototype will point to Animal, not Dog. This can lead to confusion and errors in the code.
+// Dog.prototype = Animal.prototype;
+// console.log(Dog.prototype === Animal.prototype);
 
 // this line we can add else Dog.prototype.constructor will show Animal
 Dog.prototype.constructor = Dog;
@@ -172,6 +200,9 @@ console.log(tyson.__proto__);
 console.log(typeof tyson.__proto__);
 console.log(Object.getPrototypeOf(tyson));
 console.log(tyson.__proto__.__proto__ === Animal.prototype);
+console.log(tyson.__proto__.constructor);
+console.log(Animal.prototype.constructor);
+console.log(Dog.prototype === Animal.prototype);
 tyson.showSpecies();
 
 // remember that if u add a method in child that is also in the parent then child ka object call krega wo method to child wala hi call hoga, so basically one which comes first in protype chain that one will be used.
@@ -211,10 +242,16 @@ apache.getTopSpeed();
 console.log(apache.getModel());
 
 console.log(apache);
-console.log(apache.__proto__);
-console.log(apache.__proto__.__proto__);
-console.log(apache.__proto__ === Bike.prototype);
-console.log(apache.__proto__.__proto__ === Vehicle.prototype);
+console.log(apache.__proto__, apache.__proto__ === Bike);
+console.log(apache.__proto__.__proto__, apache.__proto__.__proto__ === Vehicle);
+console.log(
+  apache.__proto__ === Bike.prototype,
+  apache.__proto__ === Vehicle.prototype
+);
+console.log(
+  apache.__proto__.__proto__ === Vehicle.prototype,
+  apache.__proto__.__proto__ === Bike.prototype
+);
 console.log(apache instanceof Bike);
 console.log(apache instanceof Vehicle);
 
@@ -238,11 +275,11 @@ const shivam = Object.create(Studentproto);
 
 /////////////////////// Encapsulation and abstraction ///////////////
 
-// JS does not support truly private fields and methods as of now
+// JS does not support truly private fields and methods as of now, upate -> now we have it
 // so for now we just fake encapsulation via some convention
 
 // WE MAKE THE PROPERTY/METHOD AS STARTING WITH _ SO THAT OTHER DEVS KNOW THAT THIS IS A PRIVATE
-// exampple if u want to make 'name' as private then define it as '_name'.
+// example if u want to make 'name' as private then define it as '_name'.
 
 // but recently JS has introduces truly private methods and fields.
 
@@ -342,6 +379,7 @@ function Employee(name, age, salary) {
 
 const employee = new Employee('John', 30, 1000);
 employee.printEmployeeDetails();
+
 // employee.calculateSalary(); //Private method cannot be accessed
 
 // Encapsulation
@@ -390,6 +428,7 @@ employee.printEmployeeDetails();
 // const circle = new Circle();
 // circle.draw();
 
+// truly priavte fields with #
 class Counter {
   // Private field
   #count = 0;
@@ -408,7 +447,22 @@ class Counter {
 const counter = new Counter();
 
 counter.increment();
-console.log(counter.getCount()); // Output: 1
+console.log(counter.count); // Output: 1
 
 // Cannot perform
 //console.log(counter.#count); // Error
+
+///////////////////////////////// LETS SEE HOW OBJECT.CREATE WORKS //////////////////////////
+
+let myObj = {
+  a: 12,
+  b: 'skjlamsa',
+  printHello() {
+    console.log('Hello');
+  },
+};
+
+let myObj2 = {};
+console.log(myObj2.prototype, myObj2.__proto__ === Object.prototype);
+myObj2.prototype = Object.create(myObj);
+console.log(myObj2.prototype);

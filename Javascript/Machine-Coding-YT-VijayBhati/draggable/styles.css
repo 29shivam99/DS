@@ -1,0 +1,25 @@
+.cont {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+.left-cont,
+.right-cont {
+  border: 2px dotted pink;
+  display: flex;
+  width: 200px;
+  height: 400px;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  border: 1px solid black;
+  width: 70%;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+}

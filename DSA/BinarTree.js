@@ -112,6 +112,37 @@ class Solution {
   }
 }
 
+//leetcode.com/problems/binary-tree-right-side-view/
+// right view of binary tree
+
+https: function levelOrder(root) {
+  if (!root) return [];
+  let q = [];
+  let ans = [];
+  q.push(root);
+  while (q.length > 0) {
+    let s = q.length;
+    for (let i = 0; i < s; i++) {
+      let currentNode = q.shift();
+      if (i == s - 1) {
+        ans.push(currentNode.val);
+      }
+
+      if (currentNode.left) {
+        q.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        q.push(currentNode.right);
+      }
+    }
+  }
+  return ans;
+}
+
+var rightSideView = function (root) {
+  return levelOrder(root);
+};
+
 //https://www.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
 //Bottom View of Binary Tree
 
@@ -169,49 +200,26 @@ class Solution {
 //https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1
 //Top View of Binary Tree
 
-/**
- * @param {Node} root
- */
-/**
-class Node{
-    constructor(data){
-        this.data = data;
-        this.left = null;
-        this.right = null;
-    }
-}
-*/
-
 class Solution {
   topViewBFS(root, mp) {
     if (!root) return;
-
     let q = [];
-
     q.push({ node: root, hLevel: 0 });
-    // console.log(q.empty, q.length)
     while (q.length) {
       let s = q.length;
-
       let nodeObj = q.shift();
       let nodeCurr = nodeObj.node;
       let hLevelCurr = nodeObj.hLevel;
       if (!mp.has(hLevelCurr)) mp.set(hLevelCurr, nodeCurr.data);
-      //console.+9log(mp);
       if (nodeCurr.left)
         q.push({ node: nodeCurr.left, hLevel: hLevelCurr - 1 });
       if (nodeCurr.right)
         q.push({ node: nodeCurr.right, hLevel: hLevelCurr + 1 });
     }
   }
-  //Function to return a list of nodes visible from the top view
-  //from left to right in Binary Tree.
   topView(root) {
-    //your code here
     let horizontalLevel = new Map();
-    //this.bottomViewHelperDFS(root, horizontalLevel, 0, 0);
     this.topViewBFS(root, horizontalLevel);
-    // console.log(horizontalLevel);
     let result = [...horizontalLevel.entries()]
       .sort((a, b) => a[0] - b[0])
       .map(([key, value]) => value);
@@ -256,7 +264,6 @@ var verticalTraversal = function (root) {
   let result = [...horizontalLevel.entries()]
     .sort((a, b) => a[0] - b[0])
     .map(([key, value]) => value);
-  //console.log(result);
   return result;
 };
 
@@ -300,6 +307,39 @@ var verticalTraversal = function (root) {
   }
   return result;
 };
+
+//https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=root-to-leaf-paths
+//root to leaf path
+class Solution {
+  /**
+* @param Node root
+
+* @returns number[][]
+*/
+
+  dfs(root, path, ans) {
+    if (!root) {
+      return;
+    }
+    if (!root.left && !root.right) {
+      path.push(root.data);
+      ans.push([...path]);
+      return;
+    }
+    path.push(root.data);
+    this.dfs(root.left, path, ans);
+    if (root.left) path.pop();
+    this.dfs(root.right, path, ans);
+    if (root.right) path.pop();
+  }
+
+  Paths(root) {
+    let path = [],
+      ans = [];
+    this.dfs(root, path, ans);
+    return ans;
+  }
+}
 
 //https://leetcode.com/problems/maximum-width-of-binary-tree/description/
 // Maximum Width of Binary Tree
