@@ -1,28 +1,29 @@
-.accordion {
+.container {
   width: 100%;
-  border: 1px solid grey;
-  transition: 0.9s;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-around;
+  border: 2px solid rgb(0, 0, 0);
+  height: 50px;
+}
+
+.tab {
+  width: 100%;
+  border: none;
+  background-color: white;
+  transition: 0.9;
+}
+
+.tab:hover {
+  background-color: rgba(123, 125, 128, 0.345);
 }
 
 .section {
-  /* border: 2px solid black; */
-  cursor: pointer;
-}
-
-.header {
-  transition: 0.2s;
-}
-
-.header:hover {
-  background-color: aqua;
-}
-
-.header {
-  height: 50px;
-  background-color: antiquewhite;
-}
-
-.content {
   display: none;
 }
 
@@ -30,6 +31,6 @@
   display: block;
 }
 
-.header-active {
-  background-color: rgb(24, 118, 118);
+.active-tab {
+  background-color: rgba(26, 26, 27, 0.345);
 }

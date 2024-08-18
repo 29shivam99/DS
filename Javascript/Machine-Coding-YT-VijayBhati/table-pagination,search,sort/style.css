@@ -1,0 +1,46 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  width: fit-content;
+  gap: 20px;
+  min-width: 50%;
+}
+
+.emp-data {
+  border: 2px solid grey;
+  width: fit-content;
+  min-width: 100%;
+}
+
+th,
+td {
+  width: 40%;
+  text-align: center;
+}
+
+.disable-btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: rgb(220, 219, 219);
+}
+
+button {
+  background-color: pink;
+  width: 70px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+}
+
+th > button {
+  background-color: antiquewhite;
+}
+
+.paginator {
+  align-self: flex-end;
+}
+
+th > input {
+  width: 80px;
+}
