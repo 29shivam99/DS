@@ -1,0 +1,35 @@
+.accordion {
+  width: 100%;
+  border: 1px solid grey;
+  transition: 0.9s;
+}
+
+.section {
+  /* border: 2px solid black; */
+  cursor: pointer;
+}
+
+.header {
+  transition: 0.2s;
+}
+
+.header:hover {
+  background-color: aqua;
+}
+
+.header {
+  height: 50px;
+  background-color: antiquewhite;
+}
+
+.content {
+  display: none;
+}
+
+.section-visible {
+  display: block;
+}
+
+.header-active {
+  background-color: rgb(24, 118, 118);
+}

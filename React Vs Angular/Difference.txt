@@ -1,0 +1,103 @@
+https://www.freecodecamp.org/news/angular-vs-react-what-to-choose-for-your-app-2/
+
+Universality-
+React:
+React is a framework used in both web and mobile development. However, for mobile development, it needs to be incorporated with Cordova. Moreover, for mobile development, there is an additional framework – React Native.
+
+React can be used to build both single-page and multiple-page web applications.
+
+Angular:
+Angular is suitable for both web and mobile development. In mobile development, however, a great share of work is done by Ionic. Furthermore, similarly to React, Angular has an additional mobile development framework. The counterpart of React Native is NativeScript.
+
+Angular can also be used for both single- and multiple-page web apps.
+
+========================
+
+Self-Sufficiency-
+React:
+React is a library for UI development
+Apps written with React need additional libraries to be used, like Redux, React Router, or Helmet. 
+Such functions as data binding, component-based routing, project generation, form validation, or dependency injection require additional modules or libraries to be installed.
+
+Angular:
+Angular is a full-fledged framework for software development, which usually does not require additional libraries. All the above-mentioned functions – data binding, component-based routing, project generation, form validation, and dependency injection – can be implemented with the means of Angular package.
+
+==========================
+
+Performance-
+React:
+React’s performance is greatly improved with the introduction of the virtual DOM. Since all virtual DOM trees are lightweight and built on server, the load on browser is reduced. Furthermore, since the data-binding process is unidirectional, bindings are not assigned watchers as in the case of Angular. Respectively, no additional workload is created.
+
+Angular:
+Angular performs worse, especially in the case of complex and dynamic web apps.
+
+The performance of Angular apps is negatively affected by bidirectional data-binding. Each binding is assigned a watcher to track changes, and each loop continues until all the watchers and associated values are checked. Because of this, the more bindings you have, the more watchers are created, and the more cumbersome the process becomes.
+
+However, the most recent update of Angular has greatly improved its performance, and it does not lose to React anymore. Moreover, the size of an Angular application is slightly smaller than the size of a React app.
+
+========================
+
+Language-
+React:
+React is based on JavaScript ES6+ combined with JSX script. JSX is an extension for syntax, which makes a JavaScript code resemble that written in HTML. This makes the code easier to understand, and typos are easier to spot. For the JSX code to be compiled in a browser, React is augmented with Babel – a code translation tool.
+
+Angular:
+Angular can use JavaScript or TypeScript, which is a superset of JS developed specifically for larger projects. TypeScript is more compact than JavaScript, the code is easier to navigate, and typos are easily spotted. Code refactoring process also becomes simpler and faster.
+
+=====================
+
+App Structure-
+React:
+The structure of React provides developers with the freedom to choose. There is no “the only right structure” for a React app. However, the necessity to design the app structure at the beginning of each project makes it more difficult and longer to start.
+
+Besides, React offers only View layer, while Model and Controller are added with the usage of other libraries.
+
+The architecture of a React app is component-based. The code is made of React components, which are rendered with React DOM library and directed in two ways: functional (with a function that returns JSX)...
+
+function Hello(props){
+return <div>Hello {props.name}</div>
+}
+...and class-based (with ES6 classes).
+
+class Hello extends React.Component {
+render() {
+return <h1>Hello, {this.props.name}</h1>;
+}
+
+
+Angular:
+The structure of Angular is fixed and complex, suitable for experienced developers.
+
+Angular is based on three layers – Model, Controller, and View. An object responsible for the Model is initialized by the Controller and displayed with the View.
+
+The application code consists of different Angular components, each being written in four separate files: a TypeScript to implement the component, an HTML file to define the view, a CSS file to define the stylistic features, and a special file for testing purposes. Links to these files are written in the app directive, which displays the structural logic of the app. Respectively, Angular components are also reusable.
+
+import { Component } from '@angular/core';
+@Component({
+selector: 'my-app',
+templateUrl: './app.component.html',
+styleUrls: ['./app.component.css']
+})
+export class AppComponent { }
+
+====================
+
+State Management-
+React:
+In React, each component has its own state. A React developer can create special components for holding the state of the entire application or a particular part of it. The major disadvantage here consists in the fact that the global state needs to be stored in multiple different parts of the app with data being manually passed around different component tree levels.
+
+To solve this problem, there is a special state management library – Redux. The idea of it is that the global state is represented as a single stateful object, which is altered in different parts of the app with the help of reducers – special Redux functions.
+
+Another solution is offered by the state management library MobX. Unlike Redux with the global state stored in a single immutable stateful object, MobX offers storing only the minimal required state, while the rest of it can be derived.
+
+Angular
+In Angular, component data is stored in component properties. Parent components pass data through to children ones. State changes in some parts can be identified and recalculated, but in a large app, it can cause a multi-directional tree series of updates, which will be difficult to track. The features can be improved with the help of state management libraries, such as NgRx or RxJS , which would make sure that the data flow is unidirectional.
+
+==============================
+
+Dependency Injection-
+React:
+React does not fully support dependency injection as it does not fully comply with the idea of functional programming and data immutability. Instead, it has a global state for all components.
+
+Angular:
+The greatest advantage of Angular rests in the fact that, unlike React, it supports dependency injection. Therefore, Angular allows having different lifecycles for different stores.

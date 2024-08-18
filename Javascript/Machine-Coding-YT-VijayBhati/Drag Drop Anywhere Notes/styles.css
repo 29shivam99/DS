@@ -1,0 +1,13 @@
+.notes-container {
+  border: 1px solid black;
+  height: 100vh;
+}
+
+.note {
+  width: 250px;
+  height: fit-content;
+  background-color: aliceblue;
+  border: 1px solid grey;
+  margin: 5px;
+  cursor: move;
+}
