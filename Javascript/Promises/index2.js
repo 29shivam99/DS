@@ -1,5 +1,6 @@
 //////////////// !OP ques /////////
 
+// Q1
 // console.log("Start");
 
 // setTimeout(() => {
@@ -29,7 +30,7 @@
   Timeout 2
  */
 
-// !Imp
+// !Imp Q2
 // console.log("Start");
 
 // function resolveAfter2Seconds() {
@@ -48,7 +49,7 @@
 
 // console.log("End");
 
-//Q;
+//Q3;
 
 // console.log("Start");
 
@@ -78,7 +79,7 @@
  * Timeout 2
  */
 
-// Q
+// Q4
 
 // console.log("Start");
 
@@ -113,7 +114,7 @@
  * timeout1
  */
 
-// Q.
+// Q5
 
 // console.log("Start");
 
@@ -148,7 +149,7 @@
  * timeout3
  */
 
-// Q
+// Q6
 
 // console.log("Start");
 
@@ -178,7 +179,7 @@
  * Timeout2
  */
 
-// Q
+// Q7
 
 // async function asyncFunc() {
 //   console.log("Async Function Start");
@@ -268,27 +269,26 @@
 
 // !    imp - Shrikanth Sir ques -
 
-const prom = new Promise((resolve, reject) => {
-  // Does something
+// const prom = new Promise((resolve) => {
+//   // Does something
+//   resolve("Success promise");
+// });
 
-  resolve("Success promise");
-});
-
-prom
-  .then((result) => console.log(result))
-  .then(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        console.log("I am a chained promise timeout who runs after 2 seconds");
-        console.log("I am a chained promise, timeout done executing");
-        reject("ERROR");
-      }, 2000);
-    });
-  })
-  .then(() => console.log("Done executing the promise"))
-  .then(() => console.log("Taare zameen par"))
-  .catch((error) => console.log(error))
-  .finally(() => console.log("I am finally"));
+// prom
+//   .then((result) => console.log(result))
+//   .then(() => {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         console.log("I am a chained promise timeout who runs after 2 seconds");
+//         console.log("I am a chained promise, timeout done executing");
+//         reject("ERROR");
+//       }, 2000);
+//     });
+//   })
+//   .then(() => console.log("Done executing the promise"))
+//   .then(() => console.log("Taare zameen par"))
+//   .catch((error) => console.log(error))
+//   .finally(() => console.log("I am finally"));
 
 ////////////////// !!!!!!!!!!!!!!!! this is super important !!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -302,8 +302,8 @@ const p1 = new Promise((resolve, reject) => {
 const p2 = new Promise((resolve, reject) => {
   setTimeout(() => {
     console.log("Async operation 2...");
-    reject(2);
-  }, 3000);
+    resolve(2);
+  }, 4000);
 });
 
 async function run() {
@@ -311,6 +311,7 @@ async function run() {
   console.log(result1);
   const result2 = await p2;
   console.log(result2);
+  console.log(typeof result1, typeof result2);
 }
 
 run();

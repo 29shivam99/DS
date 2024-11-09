@@ -13,7 +13,7 @@ const getCountriesData = function () {
 // !Important
 // do remember that responses that come from the fetch always have .json method and this method itself returns a prmoise
 
-//////////!    then and catch method in promise      ///////////
+//////////! then and catch method in promise   ///////////
 
 //* then and catch always returns a promise, does not matter if we explicitly return anything from it or not. If we return a value then it becomes the fulfillment value of the promise. And if u return a promise then it becomes the promise returned by then. And if u dont return anything then udefined will be fullfilmnet value.
 

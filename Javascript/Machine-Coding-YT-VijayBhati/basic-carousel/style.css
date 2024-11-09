@@ -1,0 +1,74 @@
+.container {
+  width: 600px;
+  height: 300px;
+  display: flex;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+  /* border: 5px solid red; */
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+  /* border: 5px solid blue; */
+}
+
+.slide-number {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: white;
+}
+
+.caption {
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  color: rgb(17, 230, 46);
+}
+
+img {
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+.prev,
+.next {
+  position: absolute;
+  color: white;
+  top: 40%;
+  cursor: pointer;
+  font-size: 40px;
+  padding: 20px;
+}
+
+.next {
+  right: 0;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: black;
+  opacity: 0.7;
+}
+
+.circle-container {
+  display: flex;
+  width: fit-content;
+  /* border: 2px solid black; */
+  align-self: center;
+  gap: 20px;
+
+  margin-top: 10px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  /* border: 2px solid black; */
+  border-radius: 50%;
+  background-color: rgb(143, 139, 139);
+  opacity: 0.4;
+}

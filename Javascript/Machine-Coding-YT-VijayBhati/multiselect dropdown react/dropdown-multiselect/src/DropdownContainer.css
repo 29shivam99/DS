@@ -1,0 +1,10 @@
+.list-items-container {
+  height: fit-content;
+  max-height: 400px;
+  overflow-y: scroll;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: rgb(44, 42, 42);
+  gap: 20px;
+}

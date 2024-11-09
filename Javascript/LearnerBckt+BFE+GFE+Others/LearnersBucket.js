@@ -343,7 +343,7 @@ const throttle = function (task, count, delay) {
   prevDelay = delay;
   callBackQueue = 1;
 };
-//Q. Good- Implement an analytics SDK that exposes log events, it takes in events and queues them, and then starts sending the events. This is a Flipkart frontend interview question.
+//! Q. Good- Implement an analytics SDK that exposes log events, it takes in events and queues them, and then starts sending the events. This is a Flipkart frontend interview question.
 
 // Send each event after a delay of 1 second and this logging fails every n % 5 times.
 // Send the next event only after the previous one resolves.
@@ -1190,3 +1190,368 @@ function fnfn() {
 
 // fnfn();
 new fnfn();
+
+//////////////////////////////////////! Implement custom instanceof method
+
+// obj.__proto__.__proto__.__proto__.__proto__.__proto__ = null
+// Object obj.__proto__.__proto__.__proto__.__proto__ === Object
+// B obj.__proto__.__proto__.__proto__ === C.prototype
+// C obj.__proto__.__proto__ === C.prototype
+// D(let obj = new D()); obj.__proto__ === D.prototype
+
+function checkInstanceOf(obj, givenClass) {
+  if (typeof constructor !== "function") {
+    throw new TypeError("The constructor argument must be a function");
+  }
+  if (obj === null || obj === undefined || typeof obj !== "object") {
+    return false;
+  }
+
+  while (obj) {
+    if (Object.getPrototypeOf(obj) === givenClass.prototype) {
+      return true;
+    }
+    obj = Object.getPrototypeOf(obj);
+  }
+
+  return false;
+}
+
+//! Check if function is called with new keyword - ni aata bhai mujhe
+
+//! Implement store class (hashSet) in JavaScript- zyada dimag ni lagana hai symbol wgrh ka
+// Problem Statement -
+// Create a simple store class (hashSet) with set(key, value), get(key), &
+// has(key) methods.
+// Example
+// const store = new Store();
+// store.set('a', 10);
+// store.set('b', 20);
+// store.set('c', 30);
+// store.get('b'); // 20
+// store.has('c'); // true
+
+class Store {
+  obj = {};
+  constructor() {}
+  set(key, value) {
+    this.obj[key] = value;
+  }
+
+  get(key) {
+    return this.obj[key];
+  }
+
+  has(key) {
+    if (this.obj[key]) return true;
+    return false;
+  }
+}
+
+// Input:
+const store = new Store();
+store.set("a", 10);
+store.set("b", 20);
+store.set("c", 30);
+console.log(store.get("b"));
+console.log(store.has("c"));
+console.log(store.get("d"));
+console.log(store.has("e"));
+
+//!Problem Statement -
+// Create a toggle function that accepts a list of arguments and toggles
+// each of them when invoked in a cycle
+
+function toggle(...args) {
+  let index = 0;
+  return function () {
+    if (index === args.length) index = 0;
+    return args[index++];
+  };
+}
+
+const hello = toggle("1", "2", "3", 4);
+console.log(hello());
+console.log(hello());
+console.log(hello());
+console.log(hello());
+console.log(hello());
+
+//! Sampling function
+
+// Problem Statement -
+// Create a function that accepts a function as input and a count and
+// executes that input function once for a given count of calls. Known as a
+// sampling function.
+
+// Example
+// function message(){
+// console.log("hello");
+// }
+// const sample = sampler(message, 4);
+// sample();
+// sample();
+// sample();
+// sample(); // “hello” this will be executed
+// sample();
+// sample();
+// sample();
+// sample(); // “hello” this will be executed
+
+function sampler(cb, freq) {
+  let countCalls = 0;
+  return function (...args) {
+    countCalls++;
+    if (countCalls === freq) {
+      if (countCalls === freq) countCalls = 0;
+      return cb(...args);
+    }
+  };
+}
+function message(n) {
+  console.log("hello", n);
+}
+
+const sample = sampler(message, 4);
+sample(1);
+sample(2);
+sample(3);
+sample(4); // “hello” this will be executed
+sample(5);
+sample(6);
+sample(7);
+sample(8); // “hello” this will be executed
+
+//
+
+//! Remove cycle from the object - learners bucket pdf has implemented on very different way- that way is also imp
+// Problem Statement -
+// Given an object with a cycle, remove the cycle or circular reference
+// from it.
+// Example
+// Input:
+// const List = function(val){
+// this.next = null;
+// this.val = val;
+// };
+// const item1 = new List(10);
+// const item2 = new List(20);
+// const item3 = new List(30);
+// item1.next = item2;
+// item2.next = item3;
+// item3.next = item1;
+
+const List = function (val) {
+  this.val = val;
+  this.next = null;
+};
+
+let l1 = new List(1);
+let l2 = new List(2);
+let l3 = new List(3);
+let l4 = new List(4);
+
+l1.next = l2;
+l2.next = l3;
+l3.next = l4;
+l4.next = l1;
+
+// my way
+function removeCycle(head) {
+  let nodes = new Set();
+  while (head) {
+    if (nodes.has(head.next)) {
+      head.next = null;
+      return;
+    }
+    nodes.add(head);
+    head = head.next;
+  }
+}
+console.log(l4.next);
+removeCycle(l1);
+console.log(l4.next);
+
+//! Filter Multidimensional Array - these kind of ques are exceptionally imp
+
+// Problem Statement -
+// Given multiple dimensional arrays, create a filter function that takes a
+// callback function as input and returns a new array with all elements
+// that have passed the test implemented in the callback function.
+// Example
+// Input:
+// const arr = [[1, [2, [3, 'foo', {'a': 1, 'b': 2}]], 'bar']];
+// const filtered = filter(arr, (e) => typeof e === 'string');
+// console.log(JSON.stringify(filtered));
+// Output:
+// [[[["foo"]],"bar"]]'
+
+const arrMulti = [[1, [2, [3, "foo", { a: 1, b: 2 }]], "bar"]];
+const fnCB = (e) => typeof e === "string";
+
+function filterMultiDeimensionalArray(arr, cb) {
+  let tmpAns = [];
+  if (Array.isArray(arr)) {
+    for (let item of arr) {
+      if (!Array.isArray(item)) {
+        if (cb(item)) {
+          tmpAns.push(item); // [[["foo"], "bar"]]
+        }
+      } else {
+        tmpAns.push(filterMultiDeimensionalArray(item, cb));
+      }
+    }
+  } else {
+    if (cb(arr)) {
+      tmpAns.push(arr);
+    }
+  }
+  console.log(tmpAns);
+  return tmpAns;
+}
+
+console.log(filterMultiDeimensionalArray(arrMulti, fnCB));
+
+//! Count elements in nested array  - these kind of ques are exceptionally imp
+// Problem Statement -
+// Given a nested array and a callback function, count all the elements
+// that pass the test in the callback and return the count.
+// This problem is similar to the above multiDimensional array filter, the
+// only difference is rather than filtering the array we have to just return
+// the count of elements in the array that passes the test.
+// Example
+// Input:
+// const arr = [[1, [2, [3, 4, "foo", { a: 1, b: 2 }]], "bar"]];
+// const count = countInArray(arr, (e) => typeof e === "number");
+// console.log(count);
+// Output:
+// 4
+
+//! Implement clearAllTimeout
+
+// Problem Statement -
+// Implement a ClearAllTimeout function that will stop all the running
+// setTimeout at once.
+// Example
+// Input:
+// setTimeout(() => {console.log("hello")}, 2000);
+// setTimeout(() => {console.log("hello1")}, 3000);
+// setTimeout(() => {console.log("hello2")}, 4000);
+// setTimeout(() => {console.log("hello3")}, 5000);
+// clearAllTimeout();
+// setTimeout(() => {console.log("hello4")}, 5000);
+// Output:
+// "hello4"
+
+////////////////////! SDK
+
+class SDK2 {
+  events = [];
+  totalEventsTried = 0;
+  logEvent(eventName) {
+    this.events.push(eventName);
+  }
+
+  delayFunction(delay, i) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (this.totalEventsTried % 5 === 0) reject();
+        else resolve();
+      }, delay);
+    });
+  }
+
+  async send() {
+    for (let i = 0; i < this.events.length; i++) {
+      try {
+        this.totalEventsTried++;
+        let result = await this.delayFunction(1000, i);
+        console.log(`"Analytics sent event ${i + 1}`);
+      } catch (e) {
+        console.log("-----------------------");
+        console.log("Failed to send ");
+        console.log("Retrying sending");
+        console.log("-----------------------");
+        this.totalEventsTried++;
+        await this.delayFunction(1000, i);
+      }
+    }
+  }
+}
+
+// Input:
+// const sdk2 = new SDK2();
+// sdk2.logEvent("event 1");
+// sdk2.logEvent("event 2");
+// sdk2.logEvent("event 3");
+// sdk2.logEvent("event 4");
+// sdk2.logEvent("event 5");
+// sdk2.logEvent("event 6");
+// sdk2.logEvent("event 7");
+// sdk2.logEvent("event 8");
+// sdk2.logEvent("event 9");
+// sdk2.logEvent("event 10");
+// sdk2.send();
+//! Retry promises N number of times
+
+// Problem Statement -
+// Implement a function in JavaScript that retries promises N number of
+// times with a delay between each call.
+
+// Example
+// Input:
+// retry(asyncFn, retries = 3 , delay = 50 , finalError = 'Failed' );
+// Output:
+// ... attempt 1 -> failed
+// ... attempt 2 -> retry after 50 ms -> failed
+// ... attempt 3 -> retry after 50 ms -> failed
+// ... Failed.
+
+// In short, we have to create a retry function that Keeps on retrying until
+// the promise resolves with delay and max retries.
+
+const delay = function (time) {
+  return new Promise((resolve, _) => {
+    setTimeout(() => {
+      resolve("");
+    }, 1000);
+  });
+};
+
+const asyncFn = function () {
+  let randNum = Math.floor(Math.random() * 10);
+
+  return new Promise((resolve, reject) => {
+    if (randNum < 0) resolve("resolved");
+    else reject("failed");
+  });
+};
+
+const retryPromise = async function (
+  asyncFn,
+  retries = 1,
+  delayTime = 50,
+  finalError = "Failed !!!!!!!!",
+  count = 1
+) {
+  try {
+    let data = await asyncFn();
+  } catch (e) {
+    console.log("attempt " + count + " failed !!!!!");
+
+    if (count < retries) {
+      await delay(delayTime);
+      retryPromise(
+        asyncFn,
+        (retries = retries),
+        (delayTime = delayTime),
+        (finalError = "Failed"),
+        (count = count + 1)
+      );
+    } else {
+      Promise.reject(finalError);
+    }
+  }
+};
+
+// retryPromise(asyncFn, 3, 2000);
