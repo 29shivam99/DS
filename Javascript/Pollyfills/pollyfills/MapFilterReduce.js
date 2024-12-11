@@ -45,17 +45,22 @@ Array.prototype.myFilter = function (cb) {
 
 Array.prototype.myReduce = function (cb, initialValue) {
   let currentArray = this;
-  let newArray = [];
   let length = currentArray.length;
 
-  let accumulator = initialValue;
+  let accumulator, i;
 
-  for (let i = 0; i < length; i++) {
-    if (accumulator) accumulator = cb(acc, currentArray[i], i, currentArray);
-    else accumulator = currentArray[i];
+  // handling edge case
+  if (initialValue === "undefined") {
+    accumulator = currentArray[0];
+    i = 1;
+  } else {
+    accumulator = initialValue;
+    i = 0;
   }
 
-  return newArray;
-};
+  for (let i = 0; i < length; i++) {
+    accumulator = cb(accumulator, currentArray[i], i, currentArray);
+  }
 
-//////////////////////////
+  return accumulator;
+};

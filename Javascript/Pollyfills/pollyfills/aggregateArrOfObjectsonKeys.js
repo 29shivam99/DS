@@ -4,7 +4,7 @@ const endorsements = [
   { skill: "javascript", user: "Bill" },
   { skill: "css", user: "Sue" },
   { skill: "javascript", user: "Sue" },
-  { skill: "html", user: "Sue" },
+  { skill: "html", user: "Sues" },
 ];
 // console.log(aggregate(endorsements, "user", "skill"));
 
